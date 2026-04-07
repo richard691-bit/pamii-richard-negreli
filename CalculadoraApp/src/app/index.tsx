@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
-
-interface BotaoProps {
-  titulo: string;
-  corFundo?: string;
-  corTexto?: string;
-  largo?: boolean;
-}
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import Botao from '../../components/botao';
 
 export default function Index() {
   const [expressao, setExpressao] = useState<string>('');
@@ -89,16 +83,6 @@ export default function Index() {
     }
   };
 
-  const Botao: React.FC<BotaoProps> = ({ titulo, corFundo = '#333333', corTexto = '#ffffff' }) => (
-    <TouchableOpacity
-      style={[styles.botao, { backgroundColor: corFundo }]}
-      onPress={() => lidarComToque(titulo)}
-      activeOpacity={0.6}
-    >
-      <Text style={[styles.textoBotao, { color: corTexto }]}>{titulo}</Text>
-    </TouchableOpacity>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
@@ -127,6 +111,7 @@ export default function Index() {
                 key={botao}
                 titulo={botao}
                 corFundo={obterCorFundo(botao)}
+                onPress={() => lidarComToque(botao)}
               />
             ))}
           </View>
@@ -167,16 +152,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-  },
-  botao: {
-    width: 78,
-    height: 78,
-    borderRadius: 39,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textoBotao: {
-    fontSize: 30,
-    fontWeight: '400',
   },
 });
