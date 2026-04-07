@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+// criado a função botão para chamar sempre que precisar
+
+
 
 interface BotaoProps {
   titulo: string;
@@ -7,7 +10,7 @@ interface BotaoProps {
   corTexto?: string;
   onPress: () => void;
 }
-
+// aqui são as funções e caracteristicas do botão
 export default function Botao({ titulo, corFundo = '#333333', corTexto = '#ffffff', onPress }: BotaoProps) {
   return (
     <TouchableOpacity
@@ -19,7 +22,7 @@ export default function Botao({ titulo, corFundo = '#333333', corTexto = '#fffff
     </TouchableOpacity>
   );
 }
-
+// estilo do botão
 const styles = StyleSheet.create({
   botao: {
     width: 100,
