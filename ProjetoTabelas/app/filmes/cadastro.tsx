@@ -230,14 +230,14 @@ export default function FilmeCadastroScreen() {
               label="Sinopse"
               placeholder="Descreva o filme em pelo menos 20 caracteres..."
               value={sinopse}
-              onChangeText={(t) => {
+              onChangeText= {(t) => {
                 setSinopse(t);
                 if (erros.sinopse) setErros((e) => ({ ...e, sinopse: "" }));
               }}
               erro={erros.sinopse}
               multiline
               numberOfLines={4}
-              style={{ height: 100, textAlignVertical: "top" }}
+              style={{ height: 100, textAlignVertical: "top", color :"#ffffff" }}
               autoCapitalize="sentences"
             />
 

@@ -33,8 +33,8 @@ const validarFilme = (
   if (!genero || genero.trim().length < 3)
     return "Gênero deve ter pelo menos 3 caracteres.";
 
-  if (!sinopse || sinopse.trim().length < 20)
-    return "Sinopse deve ter pelo menos 20 caracteres.";
+  if (!sinopse || sinopse.trim().length < 1)
+    return "Adcionar uma sinopse";
 
   if (nota === undefined || nota === null || isNaN(nota))
     return "Nota é obrigatória.";
