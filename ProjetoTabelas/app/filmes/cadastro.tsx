@@ -88,7 +88,7 @@ export default function FilmeCadastroScreen() {
       valido = false;
     }
 
-    if (!sinopse || sinopse.trim().length < 20) {
+    if (!sinopse || sinopse.trim().length <= 0) {
       novosErros.sinopse = "Sinopse deve ter pelo menos 20 caracteres.";
       valido = false;
     }
