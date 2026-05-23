@@ -47,7 +47,7 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerTopo}>
           <View style={styles.logoBadge}>
-            <Ionicons name="film" size={20} color="#FFF" />
+            <Ionicons name="film" size={20} color="#FFF" /> 
           </View>
           <Text style={styles.logoTexto}>CineBase</Text>
         </View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0A0A1A",
   },
   header: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 24, 
     paddingTop: 32,
     paddingBottom: 24,
   },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   logoTexto: {
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: "800", //Pesso da fonte  
     color: "#FFFFFF",
     letterSpacing: 1,
   },

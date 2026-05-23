@@ -19,23 +19,23 @@ import { Diretor } from "../../src/models/DiretorModel";
 
 export default function DiretorListaScreen() {
   // ─── ESTADOS ──────────────────────────────────────────
-  const [diretores, setDiretores] = useState<Diretor[]>([]);
-  const [carregando, setCarregando] = useState(true);
-  const [atualizando, setAtualizando] = useState(false);
+  const [diretores, setDiretores] = useState<Diretor[]>([]); // Lista de diretores
+  const [carregando, setCarregando] = useState(true); // true para mostrar tela de carregamento inicial
+  const [atualizando, setAtualizando] = useState(false); // true para mostrar indicador de pull-to-refresh
 
   // ─── CARREGAR DIRETORES ───────────────────────────────
   const carregarDiretores = async () => {
     const dados = await listarDiretores();
-    setDiretores(dados);
-    setCarregando(false);
-    setAtualizando(false);
+    setDiretores(dados); // Atualiza a lista de diretores no estado
+    setCarregando(false); // Desativa tela de carregamento inicial
+    setAtualizando(false); // Desativa indicador de pull-to-refresh
   };
 
   // ─── RECARREGA TODA VEZ QUE A TELA RECEBE FOCO ───────
   useFocusEffect(
-    useCallback(() => {
-      setCarregando(true);
-      carregarDiretores();
+    useCallback(() => { // Quando a tela é focada, inicia o carregamento
+      setCarregando(true); // Ativa tela de carregamento inicial
+      carregarDiretores(); 
     }, [])
   );
 
@@ -125,7 +125,7 @@ export default function DiretorListaScreen() {
         <FlatList
           data={diretores}
           keyExtractor={(item) => item.id!}
-          contentContainerStyle={styles.lista}
+          contentContainerStyle={styles.lista} // Estiliza a lista
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
@@ -136,8 +136,8 @@ export default function DiretorListaScreen() {
             />
           }
           ListHeaderComponent={
-            <View style={styles.listaHeader}>
-              <Ionicons name="trophy-outline" size={14} color="#FFD700" />
+            <View style={styles.listaHeader}> 
+              <Ionicons name="trophy-outline" size={14} color="#FFD700" /> {/* Ícone de troféu para indicar diretores premiados */}	
               <Text style={styles.listaHeaderTexto}>
                 🏆 = Diretor premiado
               </Text>

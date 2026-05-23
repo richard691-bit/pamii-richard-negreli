@@ -22,7 +22,7 @@ const Estrelas = ({ nota }: { nota: number }) => {
   const estrelas = Math.round(nota / 2);
   return (
     <View style={{ flexDirection: "row", gap: 2, marginTop: 4 }}>
-      {[1, 2, 3, 4, 5].map((i) => (
+      {[1, 2, 3, 4, 5].map((i) => ( // Para cada estrela, se o índice for menor ou igual à nota arredondada, mostra estrela cheia, caso contrário, mostra estrela vazia.
         <Ionicons
           key={i}
           name={i <= estrelas ? "star" : "star-outline"}
@@ -44,7 +44,7 @@ const CardFilme = ({
 }: {
   filme: Filme;
   onDeletar: () => void;
-}) => (
+}) => ( 
   <View style={estilosCard.card}>
     <View style={estilosCard.badgeGenero}>
       <Text style={estilosCard.badgeGeneroTexto}>{filme.genero}</Text>
@@ -82,8 +82,8 @@ const CardFilme = ({
 
 // ─── TELA PRINCIPAL ───────────────────────────────────────
 export default function FilmeListaScreen() {
-  const [filmes, setFilmes] = useState<Filme[]>([]);
-  const [carregando, setCarregando] = useState(true);
+  const [filmes, setFilmes] = useState<Filme[]>([]); 
+  const [carregando, setCarregando] = useState(true); 
   const [atualizando, setAtualizando] = useState(false);
   const [filtro, setFiltro] = useState<"todos" | "melhor" | "pior">("todos");
 
@@ -96,9 +96,9 @@ export default function FilmeListaScreen() {
   };
 
   // ─── RECARREGA AO FOCAR A TELA ──────────────────────
-  useFocusEffect(
+  useFocusEffect( // Quando a tela é focada, inicia o carregamento
     useCallback(() => {
-      setCarregando(true);
+      setCarregando(true); 
       carregarFilmes();
     }, [])
   );

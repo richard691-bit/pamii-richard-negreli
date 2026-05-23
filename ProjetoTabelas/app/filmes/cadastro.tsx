@@ -37,7 +37,7 @@ export default function FilmeCadastroScreen() {
   const [carregandoDiretores, setCarregandoDiretores] = useState(true);
 
   // ─── ESTADOS DOS ERROS ────────────────────────────────
-  const [erros, setErros] = useState({
+  const [erros, setErros] = useState({ //
     titulo: "",
     ano: "",
     genero: "",
@@ -112,7 +112,7 @@ export default function FilmeCadastroScreen() {
   };
 
   // ─── LIMPAR FORMULÁRIO ────────────────────────────────
-  const limparFormulario = () => {
+  const limparFormulario = () => { // Reseta todos os campos e erros para o estado inicial
     setTitulo("");
     setAno("");
     setGenero("");

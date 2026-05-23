@@ -69,7 +69,7 @@ export default function DiretorCadastroScreen() {
   };
 
   // ─── LIMPAR FORMULÁRIO ────────────────────────────────
-  const limparFormulario = () => {
+  const limparFormulario = () => {  // Reseta todos os campos e erros para o estado inicial
     setNome("");
     setNacionalidade("");
     setDataNascimento("");
