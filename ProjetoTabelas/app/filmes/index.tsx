@@ -10,6 +10,7 @@ import {
   Alert,
   ActivityIndicator,
   RefreshControl,
+  Platform,
 } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -109,29 +110,39 @@ export default function FilmeListaScreen() {
     carregarFilmes();
   };
 
+
+
   // ─── DELETAR ────────────────────────────────────────
-  const handleDeletar = (filme: Filme) => {
-    Alert.alert(
-      "Remover Filme",
-      `Deseja remover "${filme.titulo}"? Esta ação não pode ser desfeita.`,
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Remover",
-          style: "destructive",
-          onPress: async () => {
-            const resultado = await deletarFilme(filme.id!);
-            if (resultado.sucesso) {
-              setFilmes((prev) => prev.filter((f) => f.id !== filme.id));
-              Alert.alert("✅ Sucesso", resultado.mensagem);
-            } else {
-              Alert.alert("❌ Erro", resultado.mensagem);
-            }
-          },
-        },
-      ]
-    );
-  };
+ const handleDeletar = async (filme: Filme) => {
+  // ─── usa window.confirm na web, Alert no mobile ───
+  const confirmado = Platform.OS === "web"
+    ? window.confirm(`Deseja remover "${filme.titulo}"? Esta ação não pode ser desfeita.`) // Mostra um alerta de confirmação no web
+    : await new Promise<boolean>((resolve) => { // Mostra um alerta de confirmação no mobile
+        Alert.alert(
+          "Remover Filme",
+          `Deseja remover "${filme.titulo}"?`,
+          [
+            { text: "Cancelar", style: "cancel", onPress: () => resolve(false) },
+            { text: "Remover", style: "destructive", onPress: () => resolve(true) },
+          ]
+        );
+      });
+
+  if (!confirmado) return;
+
+  const resultado = await deletarFilme(filme.id!);
+  if (resultado.sucesso) {
+    setFilmes((prev) => prev.filter((f) => f.id !== filme.id));
+    Platform.OS === "web"
+      ? window.alert("✅ Filme removido com sucesso!")
+      : Alert.alert("✅ Sucesso", resultado.mensagem);
+  } else {
+    Platform.OS === "web"
+      ? window.alert("❌ Erro ao remover filme.")
+      : Alert.alert("❌ Erro", resultado.mensagem);
+  }
+};
+
 
   // ─── FILTROS ────────────────────────────────────────
   const filmesFiltrados = [...filmes].sort((a, b) => {

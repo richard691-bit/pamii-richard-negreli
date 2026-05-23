@@ -10,6 +10,7 @@ import {
   Alert,
   ActivityIndicator,
   RefreshControl,
+  Platform,
 } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -45,29 +46,41 @@ export default function DiretorListaScreen() {
     carregarDiretores();
   };
 
+
+
+
   // ─── DELETAR ──────────────────────────────────────────
-  const handleDeletar = (diretor: Diretor) => {
-    Alert.alert(
-      "Remover Diretor",
-      `Deseja remover "${diretor.nome}"? Esta ação não pode ser desfeita.`,
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Remover",
-          style: "destructive",
-          onPress: async () => {
-            const resultado = await deletarDiretor(diretor.id!);
-            if (resultado.sucesso) {
-              setDiretores((prev) => prev.filter((d) => d.id !== diretor.id));
-              Alert.alert("✅ Sucesso", resultado.mensagem);
-            } else {
-              Alert.alert("❌ Erro", resultado.mensagem);
-            }
-          },
-        },
-      ]
-    );
-  };
+  const handleDeletar = async (diretor: Diretor) => { // Função para deletar um diretor, recebe o objeto diretor como parâmetro
+  const confirmado = Platform.OS === "web"
+    ? window.confirm(`Deseja remover "${diretor.nome}"? Esta ação não pode ser desfeita.`) // Mostra um alerta de confirmação no web
+    : await new Promise<boolean>((resolve) => { // Mostra um alerta de confirmação no mobile
+        Alert.alert(
+          "Remover Diretor",
+          `Deseja remover "${diretor.nome}"?`,
+          [
+            { text: "Cancelar", style: "cancel", onPress: () => resolve(false) },
+            { text: "Remover", style: "destructive", onPress: () => resolve(true) },
+          ]
+        );
+      });
+
+  if (!confirmado) return;
+
+  const resultado = await deletarDiretor(diretor.id!);
+  if (resultado.sucesso) {
+    setDiretores((prev) => prev.filter((d) => d.id !== diretor.id));
+    Platform.OS === "web"
+      ? window.alert("✅ Diretor removido com sucesso!")
+      : Alert.alert("✅ Sucesso", resultado.mensagem);
+  } else {
+    Platform.OS === "web"
+      ? window.alert("❌ Erro ao remover diretor.")
+      : Alert.alert("❌ Erro", resultado.mensagem);
+  }
+};
+
+
+
 
   // ─── TELA DE CARREGAMENTO ─────────────────────────────
   if (carregando) {

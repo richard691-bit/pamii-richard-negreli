@@ -109,11 +109,16 @@ export const deletarFilme = async (
   id: string
 ): Promise<{ sucesso: boolean; mensagem: string }> => {
   try {
+    console.log("🗑️ Tentando deletar filme com ID:", id);
+    
     if (!id) return { sucesso: false, mensagem: "ID inválido." };
 
     await deleteDoc(doc(db, "filmes", id));
+    console.log("✅ Filme deletado com sucesso!");
+    
     return { sucesso: true, mensagem: "Filme removido com sucesso!" };
   } catch (error) {
+    console.log("❌ ERRO ao deletar:", JSON.stringify(error));
     return { sucesso: false, mensagem: "Erro ao remover filme." };
   }
 };
