@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  View,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
   TextInputProps,
+  View,
 } from "react-native";
 
 interface Props extends TextInputProps {

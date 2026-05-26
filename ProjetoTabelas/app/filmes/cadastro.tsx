@@ -134,7 +134,7 @@ export default function FilmeCadastroScreen() {
     if (!validarCampos()) return;
 
     setCarregando(true);
-    const resultado = await cadastrarFilme(
+    const resultado = await cadastrarFilme( // Chama a função para cadastrar o filme
       titulo,
       Number(ano),
       genero,

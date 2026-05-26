@@ -72,12 +72,12 @@ export const cadastrarFilme = async (
 };
 
 // ─── LISTAR ───────────────────────────────────────────────
-export const listarFilmes = async (): Promise<Filme[]> => {
+export const listarFilmes = async (): Promise<Filme[]> => { 
   try {
-    const q = query(collection(db, "filmes"), orderBy("titulo"));
+    const q = query(collection(db, "filmes"), orderBy("titulo")); // Ordena por título
     const snapshot = await getDocs(q);
 
-    return snapshot.docs.map((doc) => ({
+    return snapshot.docs.map((doc) => ({ 
       id: doc.id,
       ...(doc.data() as Omit<Filme, "id">),
     }));
@@ -91,12 +91,12 @@ export const listarFilmes = async (): Promise<Filme[]> => {
 export const atualizarFilme = async (
   id: string,
   dados: Partial<Filme>
-): Promise<{ sucesso: boolean; mensagem: string }> => {
+): Promise<{ sucesso: boolean; mensagem: string }> => { // Partial<Filme> permite atualizar apenas alguns campos
   try {
     if (!id) return { sucesso: false, mensagem: "ID inválido." };
 
     const ref = doc(db, "filmes", id);
-    await updateDoc(ref, { ...dados });
+    await updateDoc(ref, { ...dados }); // Atualiza apenas os campos fornecidos
 
     return { sucesso: true, mensagem: "Filme atualizado com sucesso!" };
   } catch (error) {

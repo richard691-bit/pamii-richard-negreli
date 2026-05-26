@@ -1,11 +1,11 @@
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
-  View,
-  Text,
   StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 interface Props {
   titulo: string;
@@ -33,7 +33,7 @@ export default function CardCustom({
       <View style={styles.conteudo}>
         {badge ? (
           <View style={styles.badge}>
-            <Text style={styles.badgeTexto}>{badge}</Text>
+            <Text style={styles.badgeTexto}>{badge}</Text> //badge é um pequeno componente de interface usado para exibir notificações, status, contadores ou categorias
           </View>
         ) : null}
 

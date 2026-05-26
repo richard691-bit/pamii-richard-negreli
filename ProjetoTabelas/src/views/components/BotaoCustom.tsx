@@ -7,7 +7,7 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 
-interface Props extends TouchableOpacityProps {
+interface Props extends TouchableOpacityProps { // Extende as props padrão do TouchableOpacity
   titulo: string;
   carregando?: boolean;
   variante?: "primario" | "secundario" | "perigo";

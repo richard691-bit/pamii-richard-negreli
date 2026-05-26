@@ -105,7 +105,7 @@ export default function FilmeListaScreen() {
   );
 
   // ─── PULL TO REFRESH ────────────────────────────────
-  const handleRefresh = () => {
+  const handleRefresh = () => { // Quando o usuário puxa para atualizar, inicia o estado de atualização e recarrega os filmes
     setAtualizando(true);
     carregarFilmes();
   };
